@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Product Details</title>
+<!-- Import Modern Font -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+<!-- Import Icons -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+<style>
+    /* --- 1. Solid Background --- */
+    body {
+        margin: 0;
+        padding: 0;
+        font-family: 'Poppins', sans-serif;
+        background-color: #23a6d5; /* Solid color */
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: #333;
+    }
+
+    /* --- 2. Glassmorphism Card Container --- */
+    .container {
+        background: rgba(255, 255, 255, 0.85);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        border-radius: 20px;
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+        padding: 40px;
+        width: 90%;
+        max-width: 1000px;
+        border: 1px solid rgba(255, 255, 255, 0.5);
+        animation: fadeIn 1s ease-out;
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* --- 3. Eye-Catching Header --- */
+    .header-box {
+        text-align: center;
+        margin-bottom: 40px;
+    }
+
+    h1 {
+        font-size: 3em;
+        font-weight: 700;
+        margin: 0;
+        background: -webkit-linear-gradient(#e73c7e, #23a6d5);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .subtitle {
+        color: #666;
+        font-size: 1.1em;
+        margin-top: 10px;
+    }
+
+    /* --- 4. Modern Table Styling --- */
+    .table-wrapper {
+        overflow-x: auto;
+        border-radius: 15px;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        background: white;
+        border-radius: 15px;
+        overflow: hidden;
+    }
+
+    /* Table Header */
+    thead tr {
+        background: linear-gradient(90deg, #6a11cb 0%, #2575fc 100%);
+        color: white;
+        text-transform: uppercase;
+        font-size: 0.9em;
+        letter-spacing: 1px;
+    }
+
+    th {
+        padding: 20px;
+        font-weight: 600;
+        text-align: left;
+    }
+
+    th i {
+        margin-right: 8px;
+        opacity: 0.8;
+    }
+
+    /* Table Body */
+    tbody tr {
+        border-bottom: 1px solid #eee;
+        transition: all 0.3s ease;
+        position: relative;
+    }
+
+    tbody tr:last-child {
+        border-bottom: none;
+    }
+
+    tbody tr:hover {
+        background-color: #f8f9fa;
+        transform: scale(1.02);
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        z-index: 10;
+        border-radius: 10px;
+    }
+
+    td {
+        padding: 20px;
+        color: #555;
+        font-weight: 500;
+        vertical-align: middle;
+    }
+
+    /* --- 5. Specific Column Styling --- */
+    .col-id {
+        font-family: 'Courier New', monospace;
+        font-weight: 700;
+        color: #6a11cb;
+        background: #eee;
+        padding: 5px 12px;
+        border-radius: 20px;
+        display: inline-block;
+        font-size: 0.85em;
+    }
+
+    .col-name {
+        font-size: 1.1em;
+        color: #333;
+        font-weight: 600;
+    }
+
+    .col-price {
+        font-size: 1.2em;
+        font-weight: 700;
+        color: #27ae60;
+        text-shadow: 0px 0px 1px rgba(39, 174, 96, 0.3);
+    }
+    
+    .col-price i {
+        margin-right: 5px;
+    }
+
+    /* Responsive */
+    @media (max-width: 600px) {
+        h1 { font-size: 2em; }
+        th, td { padding: 15px 10px; font-size: 0.9em; }
+        .container { padding: 20px; }
+    }
+</style>
+</head>
+<body>
+
+<div class="container">
+    <div class="header-box">
+        <h1><i class="fa-solid fa-layer-group"></i> Product Details</h1>
+        <div class="subtitle">Explore our exclusive collection</div>
+    </div>
+
+    <div class="table-wrapper">
+        <table>
+            <thead>
+                <tr>
+                    <th><i class="fa-solid fa-barcode"></i> ID</th>
+                    <th><i class="fa-solid fa-tag"></i> Product Name</th>
+                    <th><i class="fa-solid fa-coins"></i> Price</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Thymeleaf Loop -->
+                <tr th:each="product : ${products}">
+                    <td>
+                        <span class="col-id" th:text="${'#' + product.id}"></span>
+                    </td>
+                    <td>
+                        <span class="col-name" th:text="${product.productName}"></span>
+                    </td>
+                    <td>
+                        <span class="col-price">
+                            <i class="fa-solid fa-indian-rupee-sign"></i>
+                            <span th:text="${product.price}"></span>
+                        </span>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+</body>
+</html>
