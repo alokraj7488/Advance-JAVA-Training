@@ -1,4 +1,4 @@
-# ☕ Advanced Java Training Repository
+# ☕ Advanced Java Training
 
 Welcome to the official repository for **Advanced Java Training**. This space is dedicated to daily coding practices, assignments, and weekly assessments designed to master enterprise-level Java development.
 
