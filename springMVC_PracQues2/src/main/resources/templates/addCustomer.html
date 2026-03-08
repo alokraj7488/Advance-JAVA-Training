@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Customer</title>
+    
+    <!-- Import Font (Fixed URL - removed extra spaces) -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <!-- Import Icons (Fixed URL - removed extra spaces) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* --- Global Styles --- */
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            margin: 0;
+            padding: 20px;
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #333;
+        }
+
+        /* --- Glassmorphism Card --- */
+        .container {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-radius: 24px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            padding: 40px;
+            width: 100%;
+            max-width: 500px;
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            animation: slideUp 0.6s ease-out;
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* --- Header --- */
+        .header-box {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid rgba(106, 17, 203, 0.1);
+        }
+
+        h1 {
+            font-size: 2em;
+            font-weight: 700;
+            background: linear-gradient(135deg, #e73c7e, #23a6d5);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* --- Form Styles --- */
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #444;
+            font-size: 0.95em;
+        }
+
+        label i {
+            margin-right: 6px;
+            color: #6a11cb;
+        }
+
+        input[type="text"],
+        input[type="number"] {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 12px;
+            font-size: 1em;
+            font-family: 'Poppins', sans-serif;
+            transition: all 0.3s ease;
+            background: #f8f9fa;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: #6a11cb;
+            background: white;
+            box-shadow: 0 0 0 4px rgba(106, 17, 203, 0.1);
+        }
+
+        input::placeholder {
+            color: #aaa;
+        }
+
+        /* --- Buttons --- */
+        .btn-group {
+            display: flex;
+            gap: 12px;
+            margin-top: 30px;
+        }
+
+        .btn-submit {
+            flex: 1;
+            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            color: white;
+            border: none;
+            padding: 14px;
+            border-radius: 12px;
+            font-size: 1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .btn-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(106, 17, 203, 0.5);
+        }
+
+        .btn-cancel {
+            flex: 1;
+            background: #f1f1f1;
+            color: #555;
+            border: 2px solid #ddd;
+            padding: 14px;
+            border-radius: 12px;
+            font-size: 1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .btn-cancel:hover {
+            background: #e0e0e0;
+            border-color: #ccc;
+        }
+
+        /* --- Responsive --- */
+        @media (max-width: 600px) {
+            .container { padding: 30px 25px; }
+            h1 { font-size: 1.5em; }
+            .btn-group { flex-direction: column; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="header-box">
+        <h1><i class="fa-solid fa-user-plus"></i> Add Customer</h1>
+    </div>
+
+    <!-- Form posts to /saveCustomer as per your controller -->
+    <form th:action="@{/saveCustomer}" th:object="${customer}" method="post">
+        
+        <!-- Customer Name -->
+        <div class="form-group">
+            <label for="name">
+                <i class="fa-solid fa-user"></i> Customer Name
+            </label>
+            <input 
+                type="text" 
+                id="name" 
+                th:field="*{name}" 
+                placeholder="Enter customer name" 
+                required
+                maxlength="100"
+            >
+        </div>
+
+        <!-- Email -->
+        <div class="form-group">
+            <label for="email">
+                <i class="fa-solid fa-envelope"></i> Email Address
+            </label>
+            <input 
+                type="text" 
+                id="email" 
+                th:field="*{email}" 
+                placeholder="customer@example.com" 
+                pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+                required
+            >
+        </div>
+
+        <!-- Phone Number -->
+        <div class="form-group">
+            <label for="phoneNumber">
+                <i class="fa-solid fa-phone"></i> Phone Number
+            </label>
+            <input 
+                type="number" 
+                id="phoneNumber" 
+                th:field="*{phoneNumber}" 
+                placeholder="9876543210" 
+                min="1000000000"
+                max="9999999999"
+                required
+            >
+        </div>
+
+        <!-- Address -->
+        <div class="form-group">
+            <label for="address">
+                <i class="fa-solid fa-location-dot"></i> Address
+            </label>
+            <input 
+                type="text" 
+                id="address" 
+                th:field="*{address}" 
+                placeholder="Enter full address" 
+                required
+                maxlength="255"
+            >
+        </div>
+
+        <!-- Buttons -->
+        <div class="btn-group">
+            <button type="submit" class="btn-submit">
+                <i class="fa-solid fa-check"></i> Save Customer
+            </button>
+            <a href="/customers" class="btn-cancel">
+                <i class="fa-solid fa-xmark"></i> Cancel
+            </a>
+        </div>
+
+    </form>
+</div>
+
+<!-- Optional: Auto-focus on first input -->
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        document.getElementById('name').focus();
+    });
+</script>
+
+</body>
+</html>
