@@ -10,8 +10,8 @@ This repository is organized using **branches** to separate daily tasks from ass
 
 | Branch Name | Content Description | Access |
 | :--- | :--- | :--- |
-| **`Assignments`** | 📝 Daily practice topics, coding exercises, and questions. | [View Branch](/tree/Assignments) |
-| **`Weekly-Assessments`** | 📊 Code solutions and questions for weekly evaluations. | [View Branch](/tree/Weekly-Assessments) |
+| **`Assignments`** | 📝 Daily practice topics, coding exercises, and questions. | [View Branch](https://github.com/alokraj7488/Advance-JAVA-Training/tree/Assignments) |
+| **`Weekly-Assessments`** | 📊 Code solutions and questions for weekly evaluations. | [View Branch](https://github.com/alokraj7488/Advance-JAVA-Training/tree/Weekly-Assessments) |
 
 ---
 
